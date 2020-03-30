@@ -1,9 +1,6 @@
 package com.jorgeacetozi.notepad.note.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -11,15 +8,19 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Note {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
+	@SequenceGenerator(name="book_generator", sequenceName = "entity_seq", allocationSize=50)
+	@Column(updatable = false, nullable = false)
+	private Long id;
+
 	@NotEmpty
 	private String title;
+
 	@NotEmpty
 	private String content;
 	
 	// Makes Hibernate happy
-	private Note () {
+	public Note () {
 		
 	}
 	
@@ -28,7 +29,7 @@ public class Note {
 		this.content = content;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
