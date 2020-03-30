@@ -8,8 +8,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Note {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
-	@SequenceGenerator(name="book_generator", sequenceName = "entity_seq", allocationSize=50)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_generator")
+	@SequenceGenerator(name="entity_generator", sequenceName = "entity_seq", allocationSize=50)
 	@Column(updatable = false, nullable = false)
 	private Long id;
 
