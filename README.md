@@ -6,11 +6,11 @@ This simple application is used for demo purposes. It exposes the `actuator` end
 
 The Notepad stores the notes in a MySQL instance, so it expects the MySQL database to be up and running. The bellow command starts a MySQL container with a newly created database `notepad` in it. It also sets up the mysql root password as `root`.
 
-`$ docker run -d --name mysql -e MYSQL_DATABASE=notepad -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql:5.7`
+`$ docker run -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=notepad --name postgres -d -p 5432:5432 postgres`
 
 Now, clone this repository and go into the notepad directory:
 
-`$ git clone https://github.com/jorgeacetozi/notepad.git`
+`$ git clone https://github.com/vladlerkin/notepad.git`
 `$ cd notepad`
 
 Once you succesfully cloned the repository, start the application the jar artifact:
