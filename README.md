@@ -4,7 +4,7 @@ This simple application is used for demo purposes. It exposes the `actuator` end
 
 ## Usage
 
-The Notepad stores the notes in a MySQL instance, so it expects the MySQL database to be up and running. The bellow command starts a MySQL container with a newly created database `notepad` in it. It also sets up the mysql root password as `root`.
+The Notepad stores the notes in a Postgres instance, so it expects the Postgres database to be up and running. The bellow command starts a MySQL container with a newly created database `notepad` in it. It also sets up the mysql root password as `root`.
 
 `$ docker run -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=notepad --name postgres -d -p 5432:5432 postgres`
 

@@ -1,20 +1,21 @@
-spring.profiles.active: dev
+spring:
+  profiles:
+    active: dev
 
 ---
 
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
   datasource:
     url: jdbc:postgresql://localhost:5432/notepad
     username: postgres
     password: postgres
-    testWhileIdle: true
-    validationQuery: SELECT 1
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: validate
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
@@ -22,99 +23,126 @@ spring:
     cache: false
   messages:
     cache-seconds: 0
+  flyway:
+    enabled: true
 
-flyway.enabled: true
-endpoints.sensitive: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 ---
 
 test_mysql_host: ${ENV_TEST_MYSQL_HOST:localhost}
 
 spring:
-  profiles: test
+  config:
+    activate:
+      on-profile: test
   datasource:
     url: jdbc:postgresql://${test_mysql_host}:5432/notepad
     username: postgres
     password: postgres
-    testWhileIdle: true
-    validationQuery: SELECT 1
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: validate
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
+  flyway:
+    enabled: true
 
-flyway.enabled: true
-endpoints.sensitive: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 ---
 
 spring:
-  profiles: testing
+  config:
+    activate:
+      on-profile: testing
   datasource:
     url: ${testing_datasource_url}
     username: ${testing_datasource_username}
     password: ${testing_datasource_password}
-    testWhileIdle: true
-    validationQuery: SELECT 1
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: validate
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
+  flyway:
+    enabled: true
 
-flyway.enabled: true
-endpoints.sensitive: false
-logging.config: /etc/notepad/logback-spring.xml
+logging:
+  config: /etc/notepad/logback-spring.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 ---
 
 spring:
-  profiles: staging
+  config:
+    activate:
+      on-profile: staging
   datasource:
     url: ${staging_datasource_url}
     username: ${staging_datasource_username}
     password: ${staging_datasource_password}
-    testWhileIdle: true
-    validationQuery: SELECT 1
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: validate
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
+  flyway:
+    enabled: true
 
-flyway.enabled: true
-endpoints.sensitive: false
-logging.config: /etc/notepad/logback-spring.xml
+logging:
+  config: /etc/notepad/logback-spring.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 ---
 
 spring:
-  profiles: production
+  config:
+    activate:
+      on-profile: production
   datasource:
     url: ${production_datasource_url}
     username: ${production_datasource_username}
     password: ${production_datasource_password}
-    testWhileIdle: true
-    validationQuery: SELECT 1
   jpa:
     show-sql: false
     hibernate:
       ddl-auto: validate
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
+  flyway:
+    enabled: true
 
-flyway.enabled: true
-endpoints.sensitive: false
-logging.config: /etc/notepad/logback-spring.xml
+logging:
+  config: /etc/notepad/logback-spring.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
